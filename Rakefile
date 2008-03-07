@@ -53,6 +53,7 @@ hoe = Hoe.new(GEM_NAME, VERS) do |p|
     ['concurrent', '0.2.2'],
   ]     # An array of rubygem dependencies [name, version], e.g. [ ['active_support', '>= 1.3.1'] ]
   #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
+  p.spec_extras = {:extensions => ['ext/extconf.rb']}
 end
 
 desc 'Release the website and new gem version'
