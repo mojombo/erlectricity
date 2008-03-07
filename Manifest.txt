@@ -1,3 +1,4 @@
+CONTRIBUTORS
 History.txt
 Manifest.txt
 README.txt
@@ -26,6 +27,7 @@ lib/erlectricity/matcher.rb
 lib/erlectricity/port.rb
 lib/erlectricity/receiver.rb
 lib/erlectricity/types/function.rb
+lib/erlectricity/types/list.rb
 lib/erlectricity/types/new_function.rb
 lib/erlectricity/types/new_reference.rb
 lib/erlectricity/types/pid.rb
