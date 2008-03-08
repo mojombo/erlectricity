@@ -1,3 +1,6 @@
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. ext])
+
+
 require 'erlectricity/constants'
 
 require 'erlectricity/types/new_reference'
@@ -5,12 +8,13 @@ require 'erlectricity/types/pid'
 require 'erlectricity/types/function'
 require 'erlectricity/types/list'
 
+
 begin
   #try to load the decoder C extension
   require 'decoder'
 rescue LoadError
   #load the pure ruby instead
-  require 'erlectricity/decoder'  
+  require 'erlectricity/decoder'
 end
 
 require 'erlectricity/encoder'

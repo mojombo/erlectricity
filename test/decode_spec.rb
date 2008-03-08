@@ -116,8 +116,14 @@ context "When unpacking from a binary stream" do
     get("<< \"whatup\" >>").should == "whatup"
   end
   
+  specify "a good thing should be awesome" do
+    get(%Q-[{options,{struct,[{test,<<"I'm chargin' mah lazer">>}]}},{passage,<<"Why doesn't this work?">>}]-).should ==
+    [[:options, [:struct, [[:test, "I'm chargin' mah lazer"]]]], [:passage, "Why doesn't this work?"]]
+  end
+  
   def get(str)
-    bin = run_erl("term_to_binary(#{str})")
+    x = "term_to_binary(#{str.gsub(/"/, '\\\"')})"
+    bin = run_erl(x)
     Erlectricity::Decoder.read_any_from(bin)
   end
 end

@@ -127,6 +127,6 @@ context "When packing to a binary stream" do
   end
   
   def get_erl_with_magic(str)
-    run_erl("term_to_binary(#{str})")
+    run_erl("term_to_binary(#{str.gsub(/"/, '\\\"')})")
   end
 end

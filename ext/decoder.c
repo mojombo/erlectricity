@@ -123,6 +123,8 @@ VALUE read_list(unsigned char **pData) {
     rb_ary_store(array, i, read_any_raw(pData));
   }
   
+  read_1(pData);
+  
   return array;
 }
 

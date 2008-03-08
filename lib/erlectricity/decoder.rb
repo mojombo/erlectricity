@@ -185,7 +185,9 @@ class Decoder
   def read_list
     fail("Invalid Type, not an erlang list") unless read_1 == LIST
     length = read_4
-    (0...length).map{|i| read_any_raw}
+    list = (0...length).map{|i| read_any_raw}
+    read_1
+    list
   end
   
   def read_bin

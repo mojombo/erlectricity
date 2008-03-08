@@ -7,7 +7,8 @@ require 'test/spec'
 class Test::Unit::TestCase
   
   def run_erl(code)
-    `erl -noshell -eval 'A = #{code.split.join(' ')}, io:put_chars(A).' -s erlang halt`
+    cmd = %Q{erl -noshell -eval "A = #{code.split.join(' ')}, io:put_chars(A)." -s erlang halt}
+    `#{cmd}`
   end
   
   def encode_packet(code)
