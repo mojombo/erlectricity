@@ -119,6 +119,7 @@ context "When unpacking from a binary stream" do
   specify "erlang atomic booleans should decode to ruby booleans" do
     get("true").should == true
     get("false").should == false
+    get("falsereio").should == :falsereio
   end
 
   specify "a good thing should be awesome" do
