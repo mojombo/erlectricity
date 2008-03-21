@@ -92,7 +92,15 @@ class Decoder
   def read_atom
     fail("Invalid Type, not an atom") unless read_1 == ATOM
     length = read_2
-    read_string(length).to_sym
+    a = read_string(length)
+    case a
+      when "true"
+      true
+      when "false"
+      false
+      else
+      a.to_sym
+    end
   end
   
   def read_small_int

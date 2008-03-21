@@ -179,7 +179,19 @@ VALUE read_atom(unsigned char **pData) {
   unsigned char buf[length + 1];
   read_string_raw(buf, pData, length);
   
-  return ID2SYM(rb_intern((char *) buf));
+  // Erlang true and false are actually atoms
+  if( strncmp(buf, "true", length) == 0 ) { 
+	// bool trye
+	return Qtrue;
+  }
+  else if( strncmp(buf, "false", length) == 0)
+  {
+	// bool false
+	return Qfalse;
+  }
+  else {
+	return ID2SYM(rb_intern((char *) buf));
+  }  
 }
 
 VALUE read_small_int(unsigned char **pData) {
