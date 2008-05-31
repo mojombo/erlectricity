@@ -26,13 +26,9 @@ class Receiver
     end
   end
   
-  def when(*args, &block)
-    args = args.map do |a| 
-      Condition.for(a)
-    end
-    
-    args = args.first if args.length == 1
-    @matchers << Matcher.new(self, args, block)
+  def when(args, &block)
+    condition = Condition.for(args)
+    @matchers << Matcher.new(self, condition, block)
   end
   
   def run
