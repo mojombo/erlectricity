@@ -28,11 +28,7 @@ class Receiver
   
   def when(*args, &block)
     args = args.map do |a| 
-      case a
-      when Condition then a 
-      when Class then TypeCondition.new(a)
-      else StaticCondition.new(a)
-      end
+      Condition.for(a)
     end
     
     args = args.first if args.length == 1
