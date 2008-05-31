@@ -22,6 +22,7 @@ class Encoder
       when Erlectricity::List then write_list(obj)
       when Array then write_tuple(obj)
       when String then write_binary(obj)
+      when Time then write_any_raw(obj.to_i.divmod(1000000) + [obj.usec])
       else
         fail(obj)
       end
