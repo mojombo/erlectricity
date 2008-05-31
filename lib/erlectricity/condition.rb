@@ -31,6 +31,10 @@ module Erlectricity
     def pid()
       TypeCondition.new(Erlectricity::Pid)
     end
+
+    def ref()
+      TypeCondition.new(Erlectricity::NewReference)
+    end
   
     def string()
       TypeCondition.new(String)   
