@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib", "ext"]
   s.rubyforge_project = %q{erlectricity}
-  s.rubygems_version = %q{1.0.1}
+  s.rubygems_version = %q{1.1.1}
   s.summary = %q{A library to interface erlang and ruby through the erlang port system}
   s.test_files = ["test/test_erlectricity.rb", "test/test_helper.rb"]
 
