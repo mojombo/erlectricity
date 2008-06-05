@@ -13,6 +13,15 @@ sent over the Erlang binary protocol.
 
 $ gem install erlectricity
 
+-or-
+
+$ gem install mojombo-erlectricity -s http://gems.github.com
+
+== CONTRIBUTE:
+
+Contributions are welcome via GitHub! Fork the code from
+http://github.com/mojombo/erlectricity and send a pull request to mojombo.
+
 == USAGE (Ruby side):
 
 require 'rubygems'
