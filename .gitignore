@@ -1,0 +1,4 @@
+pkg
+ext/Makefile
+ext/decoder.bundle
+ext/decoder.o
