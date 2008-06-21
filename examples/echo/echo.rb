@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'erlectricity'
-require 'stringio'
 
 receive do |f|
   f.when(:echo, String) do |text|

@@ -26,7 +26,6 @@ http://github.com/mojombo/erlectricity and send a pull request to mojombo.
 
 require 'rubygems'
 require 'erlectricity'
-require 'stringio'
 
 receive do |f|
   f.when(:echo, String) do |text|

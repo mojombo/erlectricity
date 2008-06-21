@@ -41,7 +41,6 @@
 
 require 'rubygems'
 require 'erlectricity'
-require 'stringio'
 
 def log arg
   puts arg
