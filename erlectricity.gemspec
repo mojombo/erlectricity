@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.summary = %q{A library to interface erlang and ruby through the erlang port system}
   s.test_files = ["test/test_erlectricity.rb", "test/test_helper.rb"]
 
-  s.add_dependency(%q<concurrent>, ["= 0.2.2"])
+  # s.add_dependency(%q<concurrent>, ["= 0.2.2"])
 end
