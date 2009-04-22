@@ -4,6 +4,20 @@ def false_match(matcher, arg)
    matcher.matches?(arg).should == false
 end
 
+context "A matcher whose condition is a String (the class object" do
+  setup do
+    @matcher = Erlectricity::Matcher.new(nil, Erlectricity::TypeCondition.new(String), nil)
+  end
+
+  specify "should match any string" do
+    @matcher.matches?("foo").should == true
+  end
+
+  specify "should not match symbols" do
+    @matcher.matches?(:foo).should == false
+  end
+end
+
 context "A matcher whose condition is Symbol (the class object)" do
   setup do
     @matcher = Erlectricity::Matcher.new(nil, Erlectricity::TypeCondition.new(Symbol), nil)
