@@ -4,9 +4,7 @@ require 'rubygems'
 require 'gruff'
 
 receive do |f|
-  
-  
-    
+
   f.when(:plot, String, Symbol, String) do |name, style, font|
     graph = Gruff.const_get(style).new
     graph.title = name
@@ -28,7 +26,7 @@ receive do |f|
       g.when(:end){ :ok }
     end
     
-    
+
     f.send! :result, graph.to_blob
     f.receive_loop
   end

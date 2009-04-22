@@ -32,7 +32,6 @@ class Receiver
   end
   
   def run
-    
     loop do
       msg = port.receive
       return if msg.nil?
