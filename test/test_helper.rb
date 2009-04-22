@@ -5,6 +5,10 @@ require 'test/unit'
 require 'test/spec'
 require 'stringio'
 
+Dir.chdir('ext') do
+  `make`
+end
+
 class Test::Unit::TestCase
   
   def run_erl(code)
