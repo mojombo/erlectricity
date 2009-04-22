@@ -116,6 +116,12 @@ context "When unpacking from a binary stream" do
     get("<< \"whatup\" >>").should == "whatup"
   end
   
+  specify "erlang atomic booleans should decode to ruby booleans" do
+    get("true").should == true
+    get("false").should == false
+    get("falsereio").should == :falsereio
+  end
+
   specify "a good thing should be awesome" do
     get(%Q-[{options,{struct,[{test,<<"I'm chargin' mah lazer">>}]}},{passage,<<"Why doesn't this work?">>}]-).should ==
     [[:options, [:struct, [[:test, "I'm chargin' mah lazer"]]]], [:passage, "Why doesn't this work?"]]

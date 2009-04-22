@@ -1,5 +1,12 @@
 module Erlectricity
   class Condition
+    def self.for(a)
+      case a
+      when Condition then a 
+      when Class then TypeCondition.new(a)
+      else StaticCondition.new(a)
+      end
+    end
   
     def initialize
     end
@@ -30,6 +37,10 @@ module Erlectricity
   
     def pid()
       TypeCondition.new(Erlectricity::Pid)
+    end
+
+    def ref()
+      TypeCondition.new(Erlectricity::NewReference)
     end
   
     def string()

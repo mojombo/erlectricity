@@ -26,17 +26,9 @@ class Receiver
     end
   end
   
-  def when(*args, &block)
-    args = args.map do |a| 
-      case a
-      when Condition then a 
-      when Class then TypeCondition.new(a)
-      else StaticCondition.new(a)
-      end
-    end
-    
-    args = args.first if args.length == 1
-    @matchers << Matcher.new(self, args, block)
+  def when(args, &block)
+    condition = Condition.for(args)
+    @matchers << Matcher.new(self, condition, block)
   end
   
   def run

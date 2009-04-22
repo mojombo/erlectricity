@@ -18,11 +18,11 @@ context "When a receiver is passed a message that matches two match blocks it" d
   setup do
     @port = FakePort.new([:foo, :foo])
     @receiver = Erlectricity::Receiver.new(@port) do |f|
-      f.when(:foo, :foo) do
+      f.when([:foo, :foo]) do
         :first
       end
       
-      f.when(:foo, Erl.any) do
+      f.when([:foo, Erl.any]) do
         :second
       end
     end
