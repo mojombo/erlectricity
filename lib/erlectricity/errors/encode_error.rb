@@ -1,3 +1,3 @@
 class EncodeError < ErlectricityError
-  
+
 end

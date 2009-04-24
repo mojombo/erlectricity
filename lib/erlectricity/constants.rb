@@ -11,7 +11,7 @@ module Erlectricity
 
       ATOM = 100
       REF = 101           #old style reference
-      NEW_REF = 114     
+      NEW_REF = 114
       PORT = 102          #not supported accross node boundaries
       PID = 103
 
@@ -22,16 +22,15 @@ module Erlectricity
       STRING = 107
       LIST = 108
       BIN = 109
-      
+
       FUN = 117
       NEW_FUN = 112
     end
 
     VERSION = 131
-    
+
     MAX_INT = (1 << 27) -1
     MIN_INT = -(1 << 27)
     MAX_ATOM = 255
   end
-
 end

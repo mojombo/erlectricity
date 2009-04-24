@@ -1,1 +1,3 @@
-class Erlectricity::List < Array ; end
+class Erlectricity::List < Array
+
+end

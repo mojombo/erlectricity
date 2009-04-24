@@ -61,7 +61,7 @@ receive(IO.new(3), IO.new(4)) do |f|
     f.receive_loop
   end
 
-  f.when([:atom, Erl.atom]) do |sym|
+  f.when([:atom, Symbol]) do |sym|
     debug(:atom, sym, sym.to_s.reverse.to_sym)
     f.send!(:atom, sym.to_s.reverse.to_sym)
     f.receive_loop
@@ -93,7 +93,7 @@ receive(IO.new(3), IO.new(4)) do |f|
     f.receive_loop
   end
 
-  f.when([:object, Erl.any]) do |obj|
+  f.when([:object, Any]) do |obj|
     debug(:object, obj, obj)
     f.send!(:object, obj)
     f.receive_loop

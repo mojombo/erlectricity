@@ -1,3 +1,3 @@
 class DecodeError < ErlectricityError
-  
+
 end

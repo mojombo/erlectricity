@@ -2,60 +2,60 @@ module Erlectricity
   class Condition
     def self.for(a)
       case a
-      when Condition then a 
-      when Class then TypeCondition.new(a)
-      else StaticCondition.new(a)
+        when Condition then a
+        when Class then TypeCondition.new(a)
+        else StaticCondition.new(a)
       end
     end
-  
+
     def initialize
     end
-  
+
     def binding_for(arg)
       nil
     end
-  
+
     def satisfies?(arg)
       false
     end
-    
+
     alias === satisfies?
   end
 
   module Conditions
-    def atom()
+    def atom
       TypeCondition.new(Symbol)
     end
-  
-    def any()
+
+    def any
       TypeCondition.new(Object)
     end
-  
-    def number()
+
+    def number
       TypeCondition.new(Fixnum)
     end
-  
-    def pid()
+
+    def pid
       TypeCondition.new(Erlectricity::Pid)
     end
 
-    def ref()
+    def ref
       TypeCondition.new(Erlectricity::NewReference)
     end
-  
-    def string()
-      TypeCondition.new(String)   
+
+    def string
+      TypeCondition.new(String)
     end
-  
-    def list()
-      TypeCondition.new(Array) 
+
+    def list
+      TypeCondition.new(Array)
     end
-  
-    def hash()
+
+    def hash
       HashCondition.new()
     end
   end
-  
+
   extend Conditions
 end
 

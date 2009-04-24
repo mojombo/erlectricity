@@ -72,7 +72,7 @@ Data Type Conversions and Matching
     # :ok
 
     send(Port, {atom, symbol}).
-    f.when([:atom, Erl.atom]) { |sym| p sym }
+    f.when([:atom, Symbol]) { |sym| p sym }
     # :symbol
 
     send(Port, {number, 1}).
@@ -96,7 +96,7 @@ Data Type Conversions and Matching
     # {:key=>:val}
 
     send(Port, {object, {1,{2},3,<<"four">>}}).
-    f.when([:object, Erl.any]) { |any| p any }
+    f.when([:object, Any]) { |any| p any }
     # [1, [2], 3, "four"]
 
 
