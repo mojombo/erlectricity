@@ -61,31 +61,31 @@ receive(IO.new(3), IO.new(4)) do |f|
     f.receive_loop
   end
 
-  f.when(:atom, Erl.atom) do |sym|
+  f.when([:atom, Erl.atom]) do |sym|
     debug(:atom, sym, sym.to_s.reverse.to_sym)
     f.send!(:atom, sym.to_s.reverse.to_sym)
     f.receive_loop
   end
 
-  f.when(:number, Fixnum) do |num|
+  f.when([:number, Fixnum]) do |num|
     debug(:number, num, num*2)
     f.send!(:number, num*2)
     f.receive_loop
   end
 
-  f.when(:string, String) do |str|
+  f.when([:string, String]) do |str|
     debug(:string, str, str.reverse)
     f.send!(:string, str.reverse)
     f.receive_loop
   end
 
-  f.when(:array, Array) do |arr|
+  f.when([:array, Array]) do |arr|
     debug(:array, arr, arr.reverse)
     f.send!(:array, arr.reverse)
     f.receive_loop
   end
 
-  f.when(:hash, Erl.hash) do |hash|
+  f.when([:hash, Erl.hash]) do |hash|
     newhash = hash.dup
     newhash[:ruby] = :true
     debug(:hash, hash, newhash)
@@ -93,7 +93,7 @@ receive(IO.new(3), IO.new(4)) do |f|
     f.receive_loop
   end
 
-  f.when(:object, Erl.any) do |obj|
+  f.when([:object, Erl.any]) do |obj|
     debug(:object, obj, obj)
     f.send!(:object, obj)
     f.receive_loop

@@ -5,9 +5,7 @@ require 'test/unit'
 require 'test/spec'
 require 'stringio'
 
-Dir.chdir('ext') do
-  `make`
-end
+$stdout.sync = true
 
 class Test::Unit::TestCase
   

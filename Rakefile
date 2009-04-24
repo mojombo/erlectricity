@@ -1,71 +1,74 @@
 require 'rubygems'
 require 'rake'
-require 'rake/clean'
-require 'rake/testtask'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "erlectricity"
+    gem.rubyforge_project = "erlectricity"
+    gem.summary = "A library to interface erlang and ruby through the erlang port system"
+    gem.email = "tom@mojombo.com"
+    gem.homepage = "http://github.com/mojombo/erlectricity"
+    gem.authors = ["Scott Fleckenstein", "Tom Preston-Werner"]
+    gem.require_paths = ["lib", "ext"]
+    gem.files.include("ext")
+    gem.extensions << 'ext/extconf.rb'
+
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
+
+task :test do
+  require 'open3'
+  require 'fileutils'
+
+  puts "\nCleaning extension build files and running all specs in native ruby mode..."
+  FileUtils.rm_f("ext/*.bundle")
+  FileUtils.rm_f("ext/*.o")
+  Open3.popen3("ruby test/spec_suite.rb") do |stdin, stdout, stderr|
+    while !stdout.eof?
+      print stdout.read(1)
+    end
+  end
+
+  puts "\nRunning `make` to build extensions and rerunning decoder specs..."
+  Dir.chdir('ext') { `make` }
+  Open3.popen3("ruby test/decode_spec.rb") do |stdin, stdout, stderr|
+    while !stdout.eof?
+      print stdout.read(1)
+    end
+  end
+end
+
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/*_test.rb'
+    test.verbose = true
+  end
+rescue LoadError
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
+end
+
+
+task :default => :test
+
 require 'rake/rdoctask'
-require 'rake/contrib/rubyforgepublisher'
-require 'fileutils'
-require 'hoe'
-include FileUtils
-require File.join(File.dirname(__FILE__), 'lib', 'erlectricity', 'version')
-
-AUTHOR = 'Scott Fleckenstein'  # can also be an array of Authors
-EMAIL = "nullstyle@gmail.com"
-DESCRIPTION = "A library to interface erlang and ruby through the erlang port system"
-GEM_NAME = 'erlectricity' # what ppl will type to install your gem
-RUBYFORGE_PROJECT = 'erlectricity' # The unix name for your project
-HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
-DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
-
-NAME = "erlectricity"
-REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
-VERS = Erlectricity::VERSION::STRING + (REV ? ".#{REV}" : "")
-CLEAN.include ['**/.*.sw?', '*.gem', '.config', '**/.DS_Store']
-RDOC_OPTS = ['--quiet', '--title', 'erlectricity documentation',
-    "--opname", "index.html",
-    "--line-numbers", 
-    "--main", "README",
-    "--inline-source"]
-
-class Hoe
-  def extra_deps 
-    @extra_deps.reject { |x| Array(x).first == 'hoe' } 
-  end 
-end
-
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-hoe = Hoe.new(GEM_NAME, VERS) do |p|
-  p.author = AUTHOR 
-  p.description = DESCRIPTION
-  p.email = EMAIL
-  p.summary = DESCRIPTION
-  p.url = HOMEPATH
-  p.rubyforge_name = RUBYFORGE_PROJECT if RUBYFORGE_PROJECT
-  p.test_globs = ["test/**/test_*.rb"]
-  p.clean_globs = CLEAN  #An array of file patterns to delete on clean.
-  
-  # == Optional
-  p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  # p.extra_deps = [
-  #   ['concurrent', '0.2.2'],
-  # ]     # An array of rubygem dependencies [name, version], e.g. [ ['active_support', '>= 1.3.1'] ]
-  #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
-  p.spec_extras = {:extensions => ['ext/extconf.rb']}
-end
-
-desc 'Release the website and new gem version'
-task :deploy => [:check_version, :release]
-
-task :check_version do
-  unless ENV['VERSION']
-    puts 'Must pass a VERSION=x.y.z release version'
-    exit
+Rake::RDocTask.new do |rdoc|
+  if File.exist?('VERSION.yml')
+    config = YAML.load(File.read('VERSION.yml'))
+    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
+  else
+    version = ""
   end
-  unless ENV['VERSION'] == VERS
-    puts "Please update your version.rb to match the release version, currently #{VERS}"
-    exit
-  end
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "erlectricity #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end
