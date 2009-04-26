@@ -6,7 +6,7 @@ start() ->
     register(gruff, self()), 
     process_flag(trap_exit, true), 
     Cmd = "ruby ./gruff_provider.rb",
-    Port = open_port({spawn, Cmd}, [{packet, 4}, use_stdio, exit_status, binary]), 
+    Port = open_port({spawn, Cmd}, [{packet, 4}, nouse_stdio, exit_status, binary]), 
     port_loop(Port) 
   end). 
 

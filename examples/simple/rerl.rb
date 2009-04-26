@@ -54,7 +54,7 @@ def debug meth, got = nil, send = nil
   log "[ ruby ]  sending: #{meth}, #{send.inspect}"
 end
 
-receive(IO.new(3), IO.new(4)) do |f|
+receive do |f|
   f.when(:test) do
     debug(:test)
     f.send!(:test)

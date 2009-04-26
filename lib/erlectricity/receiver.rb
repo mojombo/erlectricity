@@ -62,7 +62,9 @@ module Erlectricity
 end
 
 module Kernel
-  def receive(input = STDIN, output = STDOUT, &block)
+  def receive(input = nil, output = nil, &block)
+    input ||= IO.new(3)
+    output ||= IO.new(4)
     Erlectricity::Receiver.new(Erlectricity::Port.new(input, output), nil, &block).run
   end
 end
