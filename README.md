@@ -119,3 +119,9 @@ your changes merged back into core is as follows:
 1. If necessary, rebase your commits into logical chunks, without errors
 1. Push the branch up to GitHub
 1. Send me (mojombo) a pull request for your branch
+
+
+Copyright
+---------
+
+Copyright (c) 2009 Scott Fleckenstein and Tom Preston-Werner. See LICENSE for details.
