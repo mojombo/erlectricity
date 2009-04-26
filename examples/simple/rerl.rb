@@ -39,6 +39,8 @@
 #    [erlang] received: {object,{1,{2},3,<<"four">>}}
 #
 
+$:.unshift File.join(File.dirname(__FILE__), *%w[../../lib])
+
 require 'rubygems'
 require 'erlectricity'
 
@@ -63,25 +65,25 @@ receive do |f|
 
   f.when([:atom, Symbol]) do |sym|
     debug(:atom, sym, sym.to_s.reverse.to_sym)
-    f.send!(:atom, sym.to_s.reverse.to_sym)
+    f.send!([:atom, sym.to_s.reverse.to_sym])
     f.receive_loop
   end
 
   f.when([:number, Fixnum]) do |num|
     debug(:number, num, num*2)
-    f.send!(:number, num*2)
+    f.send!([:number, num*2])
     f.receive_loop
   end
 
   f.when([:string, String]) do |str|
     debug(:string, str, str.reverse)
-    f.send!(:string, str.reverse)
+    f.send!([:string, str.reverse])
     f.receive_loop
   end
 
   f.when([:array, Array]) do |arr|
     debug(:array, arr, arr.reverse)
-    f.send!(:array, arr.reverse)
+    f.send!([:array, arr.reverse])
     f.receive_loop
   end
 
@@ -89,13 +91,13 @@ receive do |f|
     newhash = hash.dup
     newhash[:ruby] = :true
     debug(:hash, hash, newhash)
-    f.send!(:hash, newhash.to_a)
+    f.send!([:hash, newhash.to_a])
     f.receive_loop
   end
 
   f.when([:object, Any]) do |obj|
     debug(:object, obj, obj)
-    f.send!(:object, obj)
+    f.send!([:object, obj])
     f.receive_loop
   end
   

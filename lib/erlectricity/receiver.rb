@@ -54,8 +54,7 @@ module Erlectricity
       RECEIVE_LOOP
     end
 
-    def send!(*term)
-      term = term.first if term.length == 1
+    def send!(term)
       port.send(term)
     end
   end

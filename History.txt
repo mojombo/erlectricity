@@ -2,6 +2,8 @@
   * Backward Incompatible Changes
     * Implicit array call for f.when(:echo, String) must now be called as
       f.when([:echo, String]) to eliminate ambiguity
+    * Implicit array call for f.send!(:ok, "foo") must now be called as
+      f.send!([:ok, "foo"]) to eliminate ambiguity
     * The receive loop now defaults to using file descriptors 3 and 3
       instead of STDIN and STDOUT. This prevents inadvertent output
       statements from silently corrupting the transfer protocol.
