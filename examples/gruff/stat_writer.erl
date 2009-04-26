@@ -3,8 +3,8 @@
 
 start(Title, Fun) ->
   spawn(?MODULE, loop, [Title, Fun, []]).
-  
-loop(Title, Fun, []) -> 
+
+loop(Title, Fun, []) ->
   Data = accumulate([], Fun()),
   loop(Title, Fun, Data, 0).
 
@@ -12,12 +12,12 @@ loop(Title, Fun, Data, Generation) ->
   receive
     {stop} -> ok
   after 3000 ->
-    NewGeneration = Generation + 1,    
+    NewGeneration = Generation + 1,
     NewData = accumulate(Data, Fun()),
     NewChart = gruff:plot(
-       list_to_binary([Title, << "- Generation" >>, integer_to_list(NewGeneration)]), 
-      <<"/Users/scott/Library/Fonts/Arial">>,   
-      NewData, 
+       list_to_binary([Title, << "- Generation" >>, integer_to_list(NewGeneration)]),
+      <<"/Users/scott/Library/Fonts/Arial">>,
+      NewData,
       []
     ),
     file:write_file(io_lib:format("~s - ~s.png", [Title, integer_to_list(NewGeneration)]),NewChart),

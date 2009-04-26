@@ -1,5 +1,7 @@
 #!/usr/bin/env escript
+
 -export([main/1]).
+
 main(_Any) ->
   Data = [
     {apples, [10, 2, 3, 4, 4, 3]},
@@ -9,9 +11,9 @@ main(_Any) ->
   ],
   gruff:start(),
   Result = gruff:plot(
-    <<"My Charts">>, 
-    <<"/Users/scott/Library/Fonts/Arial">>, 
-    Data, 
+    <<"My Charts">>,
+    <<"/Users/scott/Library/Fonts/Arial">>,
+    Data,
     [{0, <<"2003">>}, {2, <<"2004">>}, {4, <<"2005">>}]
   ),
   file:write_file("out.png", Result).
