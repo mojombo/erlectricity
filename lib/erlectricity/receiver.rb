@@ -25,8 +25,8 @@ module Erlectricity
       end
     end
 
-    def when(args, &block)
-      condition = Condition.for(args)
+    def when(arg, &block)
+      condition = Condition.for(arg)
       @matchers << Matcher.new(self, condition, block)
     end
 
