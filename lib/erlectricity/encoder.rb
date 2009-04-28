@@ -8,6 +8,12 @@ module Erlectricity
       self.out = out
     end
 
+    def self.encode(data)
+      io = StringIO.new
+      self.new(io).write_any(data)
+      io.string
+    end
+
     def write_any obj
       write_1 Erlectricity::External::VERSION
       write_any_raw obj
