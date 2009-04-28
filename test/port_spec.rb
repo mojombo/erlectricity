@@ -9,7 +9,7 @@ context "A port" do
     port.receive.should == :bar
     port.receive.should == nil
   end
-  
+
   specify "should read_from_input if the queue gets empty" do
     port = FakePort.new(:bar)
     port.queue.clear
@@ -18,18 +18,17 @@ context "A port" do
     port.receive.should == :bar
     port.receive.should == nil
   end
-  
+
   specify "should put the terms in skipped at the front of queue when restore_skipped is called" do
     port = FakePort.new(:baz)
     port.queue.clear
     port.queue << :bar
     port.skipped << :foo
     port.restore_skipped
-    
+
     port.receive.should == :foo
     port.receive.should == :bar
     port.receive.should == :baz
     port.receive.should == nil
-    
   end
 end
