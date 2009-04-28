@@ -69,6 +69,12 @@ receive do |f|
     f.receive_loop
   end
 
+  f.when([:bool, Erl.boolean]) do |bool|
+    debug(:bool, bool, !bool)
+    f.send!([:bool, !bool])
+    f.receive_loop
+  end
+
   f.when([:number, Fixnum]) do |num|
     debug(:number, num, num*2)
     f.send!([:number, num*2])

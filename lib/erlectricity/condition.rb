@@ -54,6 +54,10 @@ module Erlectricity
     def hash
       HashCondition.new()
     end
+
+    def boolean
+      BooleanCondition.new()
+    end
   end
 
   extend Conditions

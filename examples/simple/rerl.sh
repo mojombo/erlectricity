@@ -25,6 +25,7 @@ process(Port, i_am_alive) ->
 
   send(Port, test),
   send(Port, {atom, symbol}),
+  send(Port, {bool, true}),
   send(Port, {number, 1}),
   send(Port, {string, <<"reverse">>}),
   send(Port, {array, [1,2,3]}),

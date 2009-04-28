@@ -24,6 +24,7 @@ module Erlectricity
         when Array then write_tuple(obj)
         when String then write_binary(obj)
         when Time then write_any_raw(obj.to_i.divmod(1000000) + [obj.usec])
+        when TrueClass, FalseClass then write_boolean(obj)
         else
           fail(obj)
       end
@@ -43,6 +44,10 @@ module Erlectricity
 
     def write_string(string)
       out.write(string)
+    end
+
+    def write_boolean(bool)
+      write_symbol(bool.to_s.to_sym)
     end
 
     def write_symbol(sym)
