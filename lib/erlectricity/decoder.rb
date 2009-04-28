@@ -3,7 +3,7 @@ module Erlectricity
     attr_accessor :in
     include Erlectricity::External::Types
 
-    def self.read_any_from(string)
+    def self.decode(string)
       new(StringIO.new(string)).read_any
     end
 

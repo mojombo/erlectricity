@@ -25,7 +25,7 @@ static VALUE mErlectricity;
 static VALUE cDecoder;
 void Init_decoder();
 
-VALUE method_read_any_from(VALUE klass, VALUE rString);
+VALUE method_decode(VALUE klass, VALUE rString);
 
 VALUE read_any_raw(unsigned char **pData);
 
@@ -383,7 +383,7 @@ VALUE read_any_raw(unsigned char **pData) {
   return Qnil;
 }
 
-VALUE method_read_any_from(VALUE klass, VALUE rString) {
+VALUE method_decode(VALUE klass, VALUE rString) {
   unsigned char *data = (unsigned char *) StringValuePtr(rString);
   
   unsigned char **pData = &data;
@@ -399,5 +399,5 @@ VALUE method_read_any_from(VALUE klass, VALUE rString) {
 void Init_decoder() {
   mErlectricity = rb_const_get(rb_cObject, rb_intern("Erlectricity"));
   cDecoder = rb_define_class_under(mErlectricity, "Decoder", rb_cObject);
-  rb_define_singleton_method(cDecoder, "read_any_from", method_read_any_from, 1);
+  rb_define_singleton_method(cDecoder, "decode", method_decode, 1);
 }

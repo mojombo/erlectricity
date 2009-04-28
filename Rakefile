@@ -25,8 +25,8 @@ task :test do
   require 'fileutils'
 
   puts "\nCleaning extension build files and running all specs in native ruby mode..."
-  FileUtils.rm_f("ext/*.bundle")
-  FileUtils.rm_f("ext/*.o")
+  `rm -f ext/*.bundle` && puts("rm -f ext/*.bundle")
+  `rm -f ext/*.o` && puts("rm -f ext/*.o")
   Open3.popen3("ruby test/spec_suite.rb") do |stdin, stdout, stderr|
     while !stdout.eof?
       print stdout.read(1)

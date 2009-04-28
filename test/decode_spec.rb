@@ -123,6 +123,6 @@ context "When unpacking from a binary stream" do
   def get(str)
     x = "term_to_binary(#{str.gsub(/"/, '\\\"')})"
     bin = run_erl(x)
-    Erlectricity::Decoder.read_any_from(bin)
+    Erlectricity::Decoder.decode(bin)
   end
 end

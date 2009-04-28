@@ -67,7 +67,7 @@ context "When packing to a binary stream" do
 
   specify "An Erlectiricity::NewReference should encode back to its original form" do
     ref_bin = run_erl("term_to_binary(make_ref())")
-    ruby_ref = Erlectricity::Decoder.read_any_from(ref_bin)
+    ruby_ref = Erlectricity::Decoder.decode(ref_bin)
 
     get{@encoder.write_new_reference(ruby_ref)}.should == ref_bin[1..-1]
     write_any(ruby_ref).should == ref_bin
@@ -75,7 +75,7 @@ context "When packing to a binary stream" do
 
   specify "An Erlectiricity::Pid should encode back to its original form" do
     pid_bin = run_erl("term_to_binary(spawn(fun() -> 3 end))")
-    ruby_pid = Erlectricity::Decoder.read_any_from(pid_bin)
+    ruby_pid = Erlectricity::Decoder.decode(pid_bin)
 
     get{@encoder.write_pid(ruby_pid)}.should == pid_bin[1..-1]
     write_any(ruby_pid).should == pid_bin

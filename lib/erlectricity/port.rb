@@ -40,7 +40,7 @@ module Erlectricity
 
       packet_length = raw.unpack('N').first
       data = input.read(packet_length)
-      Erlectricity::Decoder.read_any_from(data)
+      Erlectricity::Decoder.decode(data)
     end
   end
 end

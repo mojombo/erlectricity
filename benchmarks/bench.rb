@@ -10,7 +10,7 @@ p bert
 
 Benchmark.bm do|b|
   b.report("Decoder") do
-    100_000.times { Erl::Decoder.read_any_from(bert) }
+    100_000.times { Erl::Decoder.decode(bert) }
   end
 end
 

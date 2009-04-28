@@ -8,6 +8,7 @@
       instead of STDIN and STDOUT. This prevents inadvertent output
       statements from silently corrupting the transfer protocol.
     * Erlang atoms 'true' and 'false' are now converted into Ruby booleans
+    * Erlectricity::Decoder.read_any_from -> Erlectricity::Decoder.decode
   * Major Enhancements
     * Calling `rake` now runs tests (with and without compiled C extensions)
     * Package management is now done by Jeweler
