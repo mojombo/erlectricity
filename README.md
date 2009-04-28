@@ -5,6 +5,8 @@ http://github.com/mojombo/erlectricity
 
 By Scott Fleckenstein, Tom Preston-Werner
 
+This software is production-ready and in use on some large installations.
+
 
 Description
 -----------
