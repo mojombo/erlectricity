@@ -2,37 +2,46 @@
 
 Gem::Specification.new do |s|
   s.name = %q{erlectricity}
-  s.version = "0.9.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott Fleckenstein", "Tom Preston-Werner"]
-  s.date = %q{2009-04-24}
+  s.date = %q{2009-04-29}
   s.email = %q{tom@mojombo.com}
   s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = [
+    "LICENSE",
     "README.md"
   ]
   s.files = [
     "History.txt",
+    "LICENSE",
     "README.md",
     "Rakefile",
     "VERSION.yml",
-    "examples/echo/echo.beam",
+    "examples/echo/README.md",
     "examples/echo/echo.erl",
     "examples/echo/echo.rb",
+    "examples/gruff/gruff.beam",
     "examples/gruff/gruff.erl",
     "examples/gruff/gruff_provider.rb",
-    "examples/gruff/gruff_run.erl",
-    "examples/gruff/stat_run.erl",
+    "examples/gruff/gruff_run.sh",
+    "examples/gruff/stat_run.sh",
+    "examples/gruff/stat_writer.beam",
     "examples/gruff/stat_writer.erl",
+    "examples/simple/README.md",
+    "examples/simple/erl_crash.dump",
     "examples/simple/rerl.rb",
     "examples/simple/rerl.sh",
+    "examples/tinderl/README.md",
+    "examples/tinderl/tinderl.beam",
     "examples/tinderl/tinderl.erl",
     "examples/tinderl/tinderl.rb",
     "ext/decoder.c",
     "ext/extconf.rb",
     "lib/erlectricity.rb",
     "lib/erlectricity/condition.rb",
+    "lib/erlectricity/conditions/boolean.rb",
     "lib/erlectricity/conditions/hash.rb",
     "lib/erlectricity/conditions/static.rb",
     "lib/erlectricity/conditions/type.rb",
@@ -59,7 +68,6 @@ Gem::Specification.new do |s|
     "test/port_spec.rb",
     "test/receiver_spec.rb",
     "test/spec_suite.rb",
-    "test/test_erlectricity.rb",
     "test/test_helper.rb"
   ]
   s.has_rdoc = true
@@ -77,7 +85,6 @@ Gem::Specification.new do |s|
     "test/port_spec.rb",
     "test/receiver_spec.rb",
     "test/spec_suite.rb",
-    "test/test_erlectricity.rb",
     "test/test_helper.rb",
     "examples/echo/echo.rb",
     "examples/gruff/gruff_provider.rb",
