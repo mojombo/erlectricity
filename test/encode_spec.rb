@@ -112,6 +112,7 @@ context "When packing to a binary stream" do
   specify "a string should be encoded as a erlang binary would be" do
     get{@encoder.write_binary "hey who"}.should == get_erl("<< \"hey who\" >>")
     get{@encoder.write_binary ""}.should == get_erl("<< \"\" >>")
+    get{@encoder.write_binary "c\000c"}.should == get_erl("<< 99,0,99 >>")
 
     write_any("hey who").should == get_erl_with_magic("<< \"hey who\" >>")
     write_any("").should == get_erl_with_magic("<< \"\" >>")

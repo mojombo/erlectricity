@@ -1,4 +1,8 @@
-==
+== 1.0.1 / 2009-05-03
+  * Bug Fixes
+    * Fix premature null byte termination on binary decode
+
+== 1.0.0 / 2009-04-29
   * Backward Incompatible Changes
     * Implicit array call for f.when(:echo, String) must now be called as
       f.when([:echo, String]) to eliminate ambiguity

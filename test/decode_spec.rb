@@ -107,6 +107,7 @@ context "When unpacking from a binary stream" do
   specify "an erlang binary should decode to a string" do
     get("<< 3,4,255 >>").should == "\003\004\377"
     get("<< \"whatup\" >>").should == "whatup"
+    get("<< 99,0,99 >>").should == "c\000c"
   end
 
   specify "erlang atomic booleans should decode to ruby booleans" do

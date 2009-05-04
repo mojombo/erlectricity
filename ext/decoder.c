@@ -146,7 +146,7 @@ VALUE read_bin(unsigned char **pData) {
   unsigned char buf[length + 1];
   read_string_raw(buf, pData, length);
 
-  return rb_str_new2((char *) buf);
+  return rb_str_new((char *) buf, length);
 }
 
 VALUE read_string(unsigned char **pData) {
