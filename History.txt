@@ -1,3 +1,9 @@
+== 1.0.2 / 2009-06-03
+  * Bug Fixes
+    * Fix decoding of atoms [github.com/bwbuchanan]
+    * Work around Ruby's reluctance to convert the empty string to
+      a symbol [github.com/bwbuchanan]
+
 == 1.0.1 / 2009-05-03
   * Bug Fixes
     * Fix premature null byte termination on binary decode
