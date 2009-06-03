@@ -180,9 +180,9 @@ VALUE read_atom(unsigned char **pData) {
   read_string_raw(buf, pData, length);
 
   // Erlang true and false are actually atoms
-  if(strncmp((char *) buf, "true", length) == 0) {
+  if(length == 4 && strncmp((char *) buf, "true", length) == 0) {
     return Qtrue;
-  } else if(strncmp((char *) buf, "false", length) == 0) {
+  } else if(length == 5 && strncmp((char *) buf, "false", length) == 0) {
     return Qfalse;
   } else {
     return ID2SYM(rb_intern((char *) buf));
