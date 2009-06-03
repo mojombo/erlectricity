@@ -110,10 +110,18 @@ context "When unpacking from a binary stream" do
     get("<< 99,0,99 >>").should == "c\000c"
   end
 
+  specify "the empty atom should decode to the empty symbol" do
+    empty_symbol = get("''")
+    empty_symbol.should.be.instance_of Symbol
+    empty_symbol.to_s.should == ""
+  end
+
   specify "erlang atomic booleans should decode to ruby booleans" do
     get("true").should == true
     get("false").should == false
     get("falsereio").should == :falsereio
+    get("t").should == :t
+    get("f").should == :f
   end
 
   specify "a good thing should be awesome" do
