@@ -98,6 +98,8 @@ module Erlectricity
           true
         when "false"
           false
+        when ""
+          Marshal.load("\004\b:\005") # Workaround for inability to do ''.to_sym
         else
           a.to_sym
       end
