@@ -125,6 +125,8 @@ VALUE read_list(unsigned char **pData) {
 
   read_1(pData);
 
+  VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
+  return rb_funcall(newref_class, rb_intern("new"), 1, array);
   return array;
 }
 

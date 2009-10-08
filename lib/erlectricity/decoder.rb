@@ -196,7 +196,7 @@ module Erlectricity
       length = read_4
       list = (0...length).map { |i| read_any_raw }
       read_1
-      list
+      Erl::List.new(list)
     end
 
     def read_bin

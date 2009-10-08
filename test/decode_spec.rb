@@ -98,7 +98,8 @@ context "When unpacking from a binary stream" do
     get("\"#{'a' * 65534}\"").should == ['a'[0]] * 65534
   end
 
-  specify "an erlang list encoded as a list should decode to a array" do
+  specify "an erlang list encoded as a list should decode to an erl::list" do
+    get("[3,4,256]").class.should == Erl::List
     get("[3,4,256]").should == [3,4,256]
     get("\"#{'a' * 65535 }\"").should == [97] * 65535
     get("[3,4, foo, {3,4,5,bar}, 256]").should == [3,4, :foo, [3,4,5,:bar], 256]
