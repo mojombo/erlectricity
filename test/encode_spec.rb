@@ -36,6 +36,8 @@ context "When packing to a binary stream" do
     write_any(-(1 << 27)).should == get_erl_with_magic("#{-(1 << 27)}")
 
     # #SMALL_BIGNUMS
+    get{@encoder.write_fixnum(1254976067)}.should == get_erl("1254976067")
+    get{@encoder.write_fixnum(-1254976067)}.should == get_erl("-1254976067")
     # get{@encoder.write_fixnum((1 << word_length))}.should == get_erl("#{(1 << word_length)}")
     # get{@encoder.write_fixnum(-(1 << word_length) - 1)}.should == get_erl("#{-(1 << word_length) - 1}")
     # get{@encoder.write_fixnum((1 << (255 * 8)) - 1)}.should == get_erl("#{(1 << (255 * 8)) - 1}")
@@ -46,7 +48,10 @@ context "When packing to a binary stream" do
     # write_any((1 << (255 * 8)) - 1).should == get_erl_with_magic("#{(1 << (255 * 8)) - 1}")
     # write_any(-((1 << (255 * 8)) - 1)).should == get_erl_with_magic("#{-((1 << (255 * 8)) - 1)}")
     #
-    # #LARG_BIGNUMS
+    # #LARGE_BIGNUMS
+    x = 1254976067 ** 256
+    get{@encoder.write_fixnum(x)}.should == get_erl("#{x}")
+    get{@encoder.write_fixnum(-x)}.should == get_erl("-#{x}")
     # get{@encoder.write_fixnum((1 << (255 * 8)))}.should == get_erl("#{(1 << (255 * 8))}")
     # get{@encoder.write_fixnum(-(1 << (255 * 8))}.should == get_erl("#{-(1 << (255 * 8)}")
     # get{@encoder.write_fixnum((1 << (512 * 8))}.should == get_erl("#{(1 << (512 * 8))}")

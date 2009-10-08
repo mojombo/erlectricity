@@ -82,7 +82,30 @@ module Erlectricity
     end
 
     def write_bignum(num)
-      fail(num)
+      if num.is_a?(Bignum)
+        n = num.size
+      else
+        n = (num.to_s(2).size / 8.0).ceil
+      end
+      if n <= 256
+        write_1 SMALL_BIGNUM
+        write_1 n
+        write_bignum_guts(num)
+      else
+        write_1 LARGE_BIGNUM
+        write_4 n
+        write_bignum_guts(num)
+      end
+    end
+
+    def write_bignum_guts(num)
+      write_1 (num >= 0 ? 0 : 1)
+      num = num.abs
+      i = 0
+      while (rem = (num >> i * 8) % (256)) != 0
+        write_1 rem
+        i += 1
+      end
     end
 
     def write_new_reference(ref)
