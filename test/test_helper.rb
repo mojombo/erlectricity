@@ -10,7 +10,7 @@ $stdout.sync = true
 
 class Test::Unit::TestCase
   def run_erl(code)
-    cmd = %Q{erl -noshell -eval "A = #{code.split.join(' ')}, io:put_chars(A)." -s erlang halt}
+    cmd = %Q{erl -noshell -eval "A = #{code.split.join(' ')}, io:put_chars(binary_to_list(A))." -s erlang halt}
     `#{cmd}`
   end
 
