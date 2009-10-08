@@ -182,13 +182,13 @@ module Erlectricity
 
     def read_nil
       fail("Invalid Type, not a nil list") unless read_1 == NIL
-      []
+      Erlectricity::List.new([])
     end
 
     def read_erl_string
       fail("Invalid Type, not an erlang string") unless read_1 == STRING
       length = read_2
-      read_string(length).unpack('C' * length)
+      Erlectricity::List.new(read_string(length).unpack('C' * length))
     end
 
     def read_list
@@ -196,7 +196,7 @@ module Erlectricity
       length = read_4
       list = (0...length).map { |i| read_any_raw }
       read_1
-      Erl::List.new(list)
+      Erlectricity::List.new(list)
     end
 
     def read_bin

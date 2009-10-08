@@ -90,10 +90,12 @@ context "When unpacking from a binary stream" do
   end
 
   specify "an empty erlang list encoded as a nil should decode to an array" do
+    get("[]").class.should == Erl::List
     get("[]").should == []
   end
 
   specify "an erlang list encoded as a string should decode to an array of bytes (less than ideal, but consistent)" do
+    get("\"asdasd\"").class.should == Erl::List
     get("\"asdasd\"").should == "asdasd".split('').map{|c| c[0]}
     get("\"#{'a' * 65534}\"").should == ['a'[0]] * 65534
   end

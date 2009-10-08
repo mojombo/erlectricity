@@ -116,7 +116,8 @@ VALUE read_list(unsigned char **pData) {
 
   int size = read_4(pData);
 
-  VALUE array = rb_ary_new2(size);
+  VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
+  VALUE array = rb_funcall(newref_class, rb_intern("new"), 1, INT2NUM(size));
 
   int i;
   for(i = 0; i < size; ++i) {
@@ -125,8 +126,6 @@ VALUE read_list(unsigned char **pData) {
 
   read_1(pData);
 
-  VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
-  return rb_funcall(newref_class, rb_intern("new"), 1, array);
   return array;
 }
 
@@ -161,7 +160,8 @@ VALUE read_string(unsigned char **pData) {
   unsigned char buf[length + 1];
   read_string_raw(buf, pData, length);
 
-  VALUE array = rb_ary_new2(length);
+  VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
+  VALUE array = rb_funcall(newref_class, rb_intern("new"), 1, INT2NUM(length));
 
   int i = 0;
   for(i; i < length; ++i) {
@@ -292,7 +292,8 @@ VALUE read_nil(unsigned char **pData) {
     rb_raise(rb_eStandardError, "Invalid Type, not a nil list");
   }
 
-  return rb_ary_new2(0);
+  VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
+  return rb_funcall(newref_class, rb_intern("new"), 0);
 }
 
 // specials
