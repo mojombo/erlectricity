@@ -1,3 +1,8 @@
+==
+  * Minor Improvements
+    * Implement Bignum encoding
+    * Fix tests on Erlang R13B
+
 == 1.0.2 / 2009-06-03
   * Bug Fixes
     * Fix decoding of atoms [github.com/bwbuchanan]
