@@ -1,4 +1,4 @@
-==
+== 1.1.0 / 2009-10-08
   * Minor Improvements
     * Implement Bignum encoding
     * Fix tests on Erlang R13B
