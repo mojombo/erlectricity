@@ -127,6 +127,11 @@ context "When unpacking from a binary stream" do
     get("f").should == :f
   end
 
+  specify "massive binaries should not overflow the stack" do
+    bin = [131,109,0,128,0,0].pack('c*') + ('a' * (8 * 1024 * 1024))
+    assert_equal (8 * 1024 * 1024), Erlectricity::Decoder.decode(bin).size
+  end
+
   specify "a good thing should be awesome" do
     get(%Q-[{options,{struct,[{test,<<"I'm chargin' mah lazer">>}]}},{passage,<<"Why doesn't this work?">>}]-).should ==
     [[:options, [:struct, [[:test, "I'm chargin' mah lazer"]]]], [:passage, "Why doesn't this work?"]]

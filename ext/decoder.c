@@ -97,7 +97,7 @@ VALUE read_large_tuple(unsigned char **pData) {
     rb_raise(rb_eStandardError, "Invalid Type, not a large tuple");
   }
 
-  int arity = read_4(pData);
+  unsigned int arity = read_4(pData);
 
   VALUE array = rb_ary_new2(arity);
 
@@ -114,7 +114,7 @@ VALUE read_list(unsigned char **pData) {
     rb_raise(rb_eStandardError, "Invalid Type, not an erlang list");
   }
 
-  int size = read_4(pData);
+  unsigned int size = read_4(pData);
 
   VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
   VALUE array = rb_funcall(newref_class, rb_intern("new"), 1, INT2NUM(size));
@@ -131,7 +131,7 @@ VALUE read_list(unsigned char **pData) {
 
 // primitives
 
-void read_string_raw(unsigned char *dest, unsigned char **pData, int length) {
+void read_string_raw(unsigned char *dest, unsigned char **pData, unsigned int length) {
   memcpy((char *) dest, (char *) *pData, length);
   *(dest + length) = (unsigned char) 0;
   *pData += length;
@@ -142,12 +142,12 @@ VALUE read_bin(unsigned char **pData) {
     rb_raise(rb_eStandardError, "Invalid Type, not an erlang binary");
   }
 
-  int length = read_4(pData);
+  unsigned int length = read_4(pData);
 
-  unsigned char buf[length + 1];
-  read_string_raw(buf, pData, length);
+  VALUE rStr = rb_str_new((char *) *pData, length);
+  *pData += length;
 
-  return rb_str_new((char *) buf, length);
+  return rStr;
 }
 
 VALUE read_string(unsigned char **pData) {
