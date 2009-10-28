@@ -1,4 +1,4 @@
-==
+== 1.1.1 / 2009-10-28
   * Bug Fixes
     * Fix bignum encoding
     * Prevent stack overflow for massive binaries in c decoder
