@@ -101,10 +101,10 @@ module Erlectricity
     def write_bignum_guts(num)
       write_1 (num >= 0 ? 0 : 1)
       num = num.abs
-      i = 0
-      while (rem = (num >> i * 8) % (256)) != 0
+      while num != 0
+        rem = num % 256
         write_1 rem
-        i += 1
+        num = num >> 8
       end
     end
 

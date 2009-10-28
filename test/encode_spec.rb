@@ -36,6 +36,7 @@ context "When packing to a binary stream" do
     write_any(-(1 << 27)).should == get_erl_with_magic("#{-(1 << 27)}")
 
     # #SMALL_BIGNUMS
+    get{@encoder.write_fixnum(10_000_000_000_000_000_000)}.should == get_erl("10000000000000000000")
     get{@encoder.write_fixnum(1254976067)}.should == get_erl("1254976067")
     get{@encoder.write_fixnum(-1254976067)}.should == get_erl("-1254976067")
     # get{@encoder.write_fixnum((1 << word_length))}.should == get_erl("#{(1 << word_length)}")
