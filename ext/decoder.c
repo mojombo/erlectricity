@@ -156,16 +156,13 @@ VALUE read_string(unsigned char **pData) {
   }
 
   int length = read_2(pData);
-
-  unsigned char buf[length + 1];
-  read_string_raw(buf, pData, length);
-
   VALUE newref_class = rb_const_get(mErlectricity, rb_intern("List"));
   VALUE array = rb_funcall(newref_class, rb_intern("new"), 1, INT2NUM(length));
 
   int i = 0;
   for(i; i < length; ++i) {
-    rb_ary_store(array, i, INT2NUM(*(buf + i)));
+    rb_ary_store(array, i, INT2NUM(**pData));
+    *pData += 1;
   }
 
   return array;
