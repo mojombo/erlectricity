@@ -34,6 +34,7 @@ task :test do
   end
 
   puts "\nRunning `make` to build extensions and rerunning decoder specs..."
+  Dir.chdir('ext') { `ruby extconf.rb` }
   Dir.chdir('ext') { `make` }
   Open3.popen3("ruby test/decode_spec.rb") do |stdin, stdout, stderr|
     while !stdout.eof?
@@ -59,6 +60,7 @@ end
 task :default => :test
 
 require 'rake/rdoctask'
+require 'yaml'
 Rake::RDocTask.new do |rdoc|
   if File.exist?('VERSION.yml')
     config = YAML.load(File.read('VERSION.yml'))
