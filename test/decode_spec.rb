@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+load File.dirname(__FILE__) + '/test_helper.rb'
 
 context "When unpacking from a binary stream" do
   setup do
