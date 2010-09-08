@@ -11,6 +11,8 @@ module Erlectricity
       input.sync = true
       output.sync = true
 
+      output.set_encoding("ASCII-8BIT")
+
       @encoder = Erlectricity::Encoder.new(nil)
       @skipped = []
       @queue = []
