@@ -2,6 +2,7 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 
 require 'erlectricity'
 require 'rubygems'
+gem 'test-unit'
 require 'test/unit'
 require 'test/spec'
 require 'stringio'
@@ -10,7 +11,7 @@ $stdout.sync = true
 
 class Test::Unit::TestCase
   def run_erl(code)
-    cmd = %Q{erl -noshell -eval "A = #{code.split.join(' ')}, io:put_chars(A)." -s erlang halt}
+    cmd = %Q{erl -noshell -eval "A = #{code.split.join(' ')}, io:put_chars(unicode:characters_to_binary(A, latin1))." -s erlang halt}
     `#{cmd}`
   end
 
