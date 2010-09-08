@@ -229,7 +229,7 @@ VALUE read_small_bignum(unsigned char **pData) {
   unsigned char buf[size + 1];
   read_string_raw(buf, pData, size);
 
-  int i;
+  unsigned int i;
   for(i = 0; i < size; ++i) {
     tmp = INT2FIX(*(buf + i));
     tmp = rb_funcall(tmp, rb_intern("<<"), 1, INT2NUM(i * 8));
@@ -257,7 +257,7 @@ VALUE read_large_bignum(unsigned char **pData) {
   unsigned char buf[size + 1];
   read_string_raw(buf, pData, size);
 
-  int i;
+  unsigned int i;
   for(i = 0; i < size; ++i) {
     tmp = INT2FIX(*(buf + i));
     tmp = rb_funcall(tmp, rb_intern("<<"), 1, INT2NUM(i * 8));
