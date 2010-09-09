@@ -94,13 +94,13 @@ context "When unpacking from a binary stream" do
   end
 
   specify "an erlang list encoded as a string should decode to an array of bytes (less than ideal, but consistent)" do
-    get("\"asdasd\"").should == "asdasd".split('').map{|c| c[0].ord}
-    #get("\"#{'a' * 65534}\"").should == ['a'[0]] * 65534
+    get("\"asdasd\"").should == "asdasd".split('').map{|c| c[0]}
+    get("\"#{'a' * 65534}\"").should == ['a'[0]] * 65534
   end
 
   specify "an erlang list encoded as a list should decode to a array" do
     get("[3,4,256]").should == [3,4,256]
-    #get("\"#{'a' * 65535 }\"").should == [97] * 65535
+    get("\"#{'a' * 65535 }\"").should == [97] * 65535
     get("[3,4, foo, {3,4,5,bar}, 256]").should == [3,4, :foo, [3,4,5,:bar], 256]
   end
 
