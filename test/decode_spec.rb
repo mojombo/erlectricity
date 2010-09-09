@@ -94,8 +94,8 @@ context "When unpacking from a binary stream" do
   end
 
   specify "an erlang list encoded as a string should decode to an array of bytes (less than ideal, but consistent)" do
-    get("\"asdasd\"").should == "asdasd".split('').map{|c| c[0]}
-    get("\"#{'a' * 65534}\"").should == ['a'[0]] * 65534
+    get("\"asdasd\"").should == "asdasd".split('').map{|c| c[0].ord}
+    get("\"#{'a' * 65534}\"").should == ['a'[0].ord] * 65534
   end
 
   specify "an erlang list encoded as a list should decode to a array" do
