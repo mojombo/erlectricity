@@ -4,6 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
+    gem.version = "0.9.0"
     gem.name = "erlectricity"
     gem.rubyforge_project = "erlectricity"
     gem.summary = "A library to interface erlang and ruby through the erlang port system"
