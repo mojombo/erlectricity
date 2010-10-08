@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README.md",
      "Rakefile",
-     "VERSION.yml",
      "benchmarks/bench.rb",
      "erlectricity.gemspec",
      "examples/echo/README.md",
