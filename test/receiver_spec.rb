@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+load File.dirname(__FILE__) + '/test_helper.rb'
 
 def simple_receiver_and_port(*terms, &block)
   port = FakePort.new(*terms)

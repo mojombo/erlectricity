@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+load File.dirname(__FILE__) + '/test_helper.rb'
 
 context "A port" do
   specify "should return terms from the queue if it is not empty" do

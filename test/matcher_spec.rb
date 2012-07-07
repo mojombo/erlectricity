@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+load File.dirname(__FILE__) + '/test_helper.rb'
 
 def false_match(matcher, arg)
    matcher.matches?(arg).should == false
